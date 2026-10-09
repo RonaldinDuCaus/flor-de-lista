@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fae2ec"><meta name="description" content="Seu cantinho rosa para planejar a rotina, organizar tarefas e celebrar cada conquista.">
+<title>Flor de Lista — Um dia mais leve</title>
+<link rel="icon" href="images/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="./"><img src="images/flor.svg" width="46" height="46" alt=""><span>flor de<span class="brand-second">lista<span class="brand-dot">.</span></span></span></a>
+    <div class="sidebar-label">UM POUCO DE ORGANIZAÇÃO.<br>UM TANTO DE CARINHO.</div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-current"><span aria-hidden="true">▤</span> Meu planejamento</div>
+    <p class="sidebar-caption">Um espaço só seu para<br>cultivar boas ideias.</p>
+    <div id="sidebar-summary" class="sidebar-summary" hidden>
+      <div id="progress-ring" class="progress-ring"><span id="progress-value">0%</span></div>
+      <strong>Cada passo conta.</strong><p id="progress-caption">Sua próxima conquista começa aqui.</p>
+    </div>
+    <div class="sidebar-bottom"><span class="side-flower" aria-hidden="true">✿</span><p>Floresça<br><em>no seu tempo.</em></p><span>FEITO PARA DIAS REAIS ♡</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><span id="today">Um novo dia, novas possibilidades.</span><div><span class="tiny-heart" aria-hidden="true">♡</span><button id="logout" class="button quiet" type="button" hidden>Sair da conta</button></div></header>
+    <main>
+      <p id="message" class="notice" role="status" aria-live="polite" hidden></p>
+      <noscript><p class="notice error">Ative o JavaScript para usar sua lista de tarefas.</p></noscript>
+      <section id="auth-view" class="auth-view">
+        <div class="auth-heading"><span class="eyebrow">MENOS CORRERIA, MAIS LEVEZA</span><h1>Um dia bonito começa<br>com <em>um pequeno passo.</em></h1><p>Organize o que importa e celebre cada tarefa concluída.</p></div>
+        <div class="auth-grid">
+          <section class="auth-card" aria-labelledby="auth-heading">
+            <div class="card-flower" aria-hidden="true">✿</div><h2 id="auth-heading">Seu cantinho está aqui.</h2><p id="auth-description">Entre para cuidar dos seus planos.</p>
+            <div class="tabs" aria-label="Acesso à conta"><button id="login-tab" type="button" aria-pressed="true">Entrar</button><button id="signup-tab" type="button" aria-pressed="false">Criar conta</button></div>
+            <form id="auth-form"><fieldset id="auth-fields" disabled>
+              <label for="email">Seu e-mail</label><input id="email" type="email" autocomplete="email" required maxlength="254" placeholder="voce@exemplo.com">
+              <label for="password">Sua senha</label><input id="password" type="password" autocomplete="current-password" required placeholder="Digite sua senha">
+              <div id="confirm-group" hidden><label for="confirm-password">Confirme sua senha</label><input id="confirm-password" type="password" autocomplete="new-password" disabled placeholder="Digite mais uma vez"><p class="hint">Use pelo menos 6 caracteres.</p></div>
+              <button id="auth-submit" type="submit" class="button primary full">Entrar no meu cantinho <span aria-hidden="true">↗</span></button>
+            </fieldset></form>
+            <p class="auth-foot"><span aria-hidden="true">♡</span> Seus planos ficam só na sua conta.</p>
+          </section>
+          <div class="welcome-visual"><span class="handwritten">uma coisa de cada vez…</span><img src="images/planner.svg" width="480" height="470" alt="Ilustração de um caderno rosa com lista marcada, flores, lápis e um bilhete com coração."><p>Não precisa dar conta de tudo hoje.<br><strong>Começar já é uma conquista.</strong></p></div>
+        </div>
+        <aside id="setup" class="setup" hidden><strong>Seu espaço está quase pronto ♡</strong><p>Falta conectar seu projeto Firebase para liberar o cadastro e salvar as tarefas. O arquivo CONFIGURAR.txt, na pasta do projeto, explica como.</p></aside>
+      </section>
+      <section id="dashboard" hidden aria-labelledby="dashboard-title">
+        <div class="dashboard-hero"><div><span class="eyebrow">HOJE TEM ESPAÇO PARA RECOMEÇAR</span><h1 id="dashboard-title">Pequenos passos,<br><em>grandes conquistas.</em></h1><p>Coloque seus planos no papel. O resto, um passo de cada vez.</p><button id="new-task" type="button" class="button primary" disabled><span aria-hidden="true">＋</span> Nova tarefa</button></div><img src="images/planner.svg" width="300" height="294" alt="Caderno rosa com lista de tarefas e flores."></div>
+        <div class="stats">
+          <div class="stat"><span class="stat-icon" aria-hidden="true">▤</span><div><span>Todos os planos</span><strong id="total">0</strong></div></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">◷</span><div><span>Um passo de cada vez</span><strong id="pending">0</strong></div></div>
+          <div class="stat"><span class="stat-icon" aria-hidden="true">✓</span><div><span>Pequenas conquistas</span><strong id="completed">0</strong></div></div>
+        </div>
+        <section class="list-panel" aria-label="Suas tarefas">
+          <div class="list-heading"><div><span class="eyebrow">MEU PLANEJAMENTO</span><h2>O que vamos fazer?</h2></div><span id="visible-count" class="count-pill">0 tarefas</span></div>
+          <div class="list-toolbar"><div class="filters" aria-label="Filtrar tarefas"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="pending" aria-pressed="false">A fazer</button><button type="button" data-filter="done" aria-pressed="false">Concluídas</button></div><div class="search"><label class="sr-only" for="search">Buscar tarefas</label><input id="search" type="search" maxlength="120" placeholder="Encontre uma tarefa…"></div></div>
+          <div id="empty" class="empty"><span aria-hidden="true">✿</span><h3 id="empty-title">Seu próximo passo começa aqui.</h3><p id="empty-text">Adicione uma tarefa e dê espaço aos seus planos.</p></div>
+          <ul id="task-list" class="task-list" aria-label="Lista de tarefas"></ul>
+          <div class="list-bottom"><span id="sync-status" role="status">Conectando…</span><span>Pequenas listas. Grandes respiros. ♡</span></div>
+        </section>
+        <p id="account" class="account"></p>
+      </section>
+    </main>
+    <footer><span>flor de lista.</span><p>Para uma rotina que também cuida de você. ♡</p></footer>
+  </div>
+</div>
+<dialog id="task-dialog" aria-labelledby="editor-heading">
+  <div class="dialog-top"><span class="eyebrow">UM PLANO PARA FLORESCER</span><button id="close-dialog" class="icon-button" type="button" aria-label="Fechar formulário">×</button></div>
+  <h2 id="editor-heading">Qual é o próximo passo?</h2><p class="muted">Vale começar pequeno. Anote o que você quer fazer.</p>
+  <p id="form-message" class="notice" role="status" aria-live="polite" hidden></p>
+  <form id="task-form"><fieldset id="task-fields">
+    <label for="task-title">Minha tarefa</label><input id="task-title" maxlength="120" required placeholder="Ex.: Separar um tempo para estudar">
+    <label for="task-description">Mais detalhes <span class="optional">(opcional)</span></label><textarea id="task-description" rows="4" maxlength="1000" placeholder="O que você não quer esquecer?"></textarea>
+    <label for="task-priority">Qual é a prioridade?</label><select id="task-priority"><option value="normal">Normal · no meu ritmo</option><option value="alta">Alta · merece atenção</option><option value="baixa">Baixa · pode esperar</option></select>
+    <div class="dialog-actions"><button id="cancel-edit" class="button quiet" type="button">Cancelar</button><button id="save-task" class="button primary" type="submit">Adicionar à minha lista ＋</button></div>
+  </fieldset></form>
+</dialog>
+</body></html>

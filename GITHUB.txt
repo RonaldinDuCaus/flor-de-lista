@@ -1,0 +1,26 @@
+FLOR DE LISTA — GITHUB
+Execute os comandos um por vez no PowerShell. Troque SEU NOME e SEU EMAIL pelos seus dados.
+
+cd "C:\Users\ronal\Desktop\Projetos Glauco\flor-de-lista"
+$env:Path = "C:\Program Files\GitHub CLI;C:\Program Files\Git\cmd;" + $env:Path
+gh auth status
+
+Se precisar entrar na conta:
+gh auth login
+
+Depois:
+git init
+git config user.name "SEU NOME"
+git config user.email "SEU EMAIL"
+gh auth setup-git
+git add .
+git commit -m "Adiciona Flor de Lista"
+git branch -M main
+gh repo create flor-de-lista --public --source=. --remote=origin --push
+gh repo view --web
+
+Esse comando cria um repositório público. Se o nome já existir, escolha outro.
+Atualizações futuras:
+git add .
+git commit -m "Atualiza Flor de Lista"
+git push
